@@ -46,9 +46,9 @@ Solver 1
   Linear System Solver = Iterative
   Linear System Iterative Method = BiCGStab
   Linear System Preconditioning = ILU1
-  Linear System Max Iterations = 500
+  Linear System Max Iterations = 5000
   Linear System Convergence Tolerance = 1.0e-8
-  Nonlinear System Max Iterations = 10
+  Nonlinear System Max Iterations = 20
   Nonlinear System Convergence Tolerance = 1.0e-5
   Nonlinear System Newton After Tolerance = 1.0e-5
   Nonlinear System Newton After Iterations = 20
@@ -58,7 +58,10 @@ End
 
 Solver 2
   Equation = Elasticity Solver
-  
+! Calculate Principal = Logical True
+! Calculate Strains = Logical True
+  Calculate Stresses = Logical True
+
   Variable = Displacement
   Variable DOFs = 2
   Procedure = "ElasticSolve" "ElasticSolver"
