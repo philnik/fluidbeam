@@ -1,0 +1,154 @@
+
+
+#+begin_src fortran :exports results
+
+a = 1
+write (*,*) "Hello World!"
+      
+#+end_src
+
+#+RESULTS:
+: Hello World!
+
+
+
+
+
+Working on fortran code
+[[./FsiStuff.f90]]
+
+Increase the speed
+
+
+* compile fortran function
+
+
+#+begin_src fortran :exports code :tangle ./Fsi1.f90
+FUNCTION Youngs( Model, n, x ) RESULT( s )
+  USE Types
+  TYPE(Model_t) :: Model
+  INTEGER :: n
+  REAL(KIND=dp) :: x,s,s1,s2,s3,xx,yy
+  
+  xx = Model % Nodes % x(n)
+  yy = Model % Nodes % y(n)
+  
+  s =  1.0d0 / SQRT( (xx-11.0)**2 + (yy-4.9)**2 )
+  
+END FUNCTION Youngs
+
+
+FUNCTION InFlow( Model, n, x ) RESULT( vin )
+  USE Types
+  TYPE(Model_t) :: Model
+  INTEGER :: n
+  REAL(KIND=dp) :: yy,x,vin,v0,vt
+  
+  xx = Model % Nodes % x(n)
+  yy = Model % Nodes % y(n)
+  
+  v0 = (-(yy**2)+10*yy)/10
+  
+  ! IF(x < 8.0) THEN
+  !   vt = x/8.0
+  ! ELSE
+  !   vt = 1.0
+  ! END IF
+
+
+  
+  !  vin = v0*vt
+
+  vin=0.1*(30 - yy)*yy
+  
+END FUNCTION InFlow
+
+#+end_src
+
+
+#+begin_src shell :results raw drawer
+cd /home/me/CAE/FluidStructureBeam
+elmerf90 FsiStuff.f90  -o FsiStuff.so
+#+end_src
+
+#+RESULTS:
+:results:
+no elmerice
+/usr/bin/f95 FsiStuff.f90 -o FsiStuff.so -fopenmp -DCONTIG= -DHAVE_EXECUTECOMMANDLINE -DUSE_ISO_C_BINDINGS -DUSE_ARPACK -O2 -g -DNDEBUG -fPIC -shared -I/usr/local/share/elmersolver/include -L/usr/local/share/elmersolver/../../lib/elmersolver -shared -lelmersolver 
+:end:
+
+
+
+
+FUNCTION InFlow( Model, n, x ) RESULT( vin )
+Model: My model
+Node: the node
+x: the vartiable ( here is time)
+
+
+
+#+RESULTS:
+:results:
+no elmerice
+/usr/bin/f95 FsiStuff.f90 -o FsiStuff.so -fopenmp -DCONTIG= -DHAVE_EXECUTECOMMANDLINE -DUSE_ISO_C_BINDINGS -DUSE_ARPACK -O2 -g -DNDEBUG -fPIC -shared -I/usr/local/share/elmersolver/include -L/usr/local/share/elmersolver/../../lib/elmersolver -shared -lelmersolver 
+:end:
+
+
+
+* execute grid
+#+begin_src shell :results raw drawer
+cd /home/me/CAE/FluidStructureBeam
+ElmerGrid 1 2 fsi.grd
+#+end_src
+
+#+RESULTS:
+:results:
+
+Starting program Elmergrid
+Elmergrid reading in-line arguments
+Output will be saved to file fsi.
+
+Elmergrid loading data:
+-----------------------
+Loading the geometry from file 'fsi.grd'.
+Loading ElmerGrid file version: 210903
+Defining the coordinate system (2-DIM).
+Loading 8 subcell limits in X-direction
+Loading 7 subcell limits in Y-direction
+Loading material structure
+LoadElmergrid: materials interval is [1,6]
+Loading boundary conditions
+Found 6 boundaries
+Loading minimum number of elements
+Reached the end of command file
+Found 1 divisions for grid
+
+Loading ElmerGrid commands from file 'fsi.grd'.
+Reached the end of command file
+Read commands from a file
+
+Elmergrid creating and manipulating meshes:
+-------------------------------------------
+20 cells were created.
+Numbered 40727 knots in 10074 9-node elements.
+Numbering order was <y><x> and max levelwidth 280.
+69 element sides between materials 6 and 1 were located to type 1.
+69 element sides between materials 4 and 1 were located to type 2.
+115 element sides between materials 2 and 1 were located to type 3.
+146 element sides between materials 3 and 1 were located to type 4.
+143 element sides between materials 5 and 1 were located to type 5.
+3 element sides between materials 5 and 2 were located to type 6.
+Coordinates defined in 2 dimensions
+
+Elmergrid saving data with method 2:
+-------------------------------------
+Saving mesh in ElmerSolver format to directory fsi.
+Reusing an existing directory
+Saving 40727 coordinates to mesh.nodes.
+Saving 10074 element topologies to mesh.elements.
+Saving boundary elements to mesh.boundary.
+Saving header info to mesh.header.
+
+Thank you for using Elmergrid!
+Send bug reports and feature wishes to elmeradm@csc.fi
+:end:
