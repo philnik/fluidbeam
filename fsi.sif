@@ -29,9 +29,9 @@ Material 1
    Density = 1.0
    Viscosity = 0.5
    Poisson Ratio = 0.3
-
-   Youngs Modulus = Variable time
-       Real Procedure "FsiStuff" "Youngs"
+   Youngs Modulus = 1.0e3	
+!   Youngs Modulus = Variable time
+!       Real Procedure "FsiStuff" "Youngs"
 End
 
 Material 2
