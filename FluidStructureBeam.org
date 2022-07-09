@@ -71,25 +71,36 @@ Read commands from a file
 Elmergrid creating and manipulating meshes:
 -------------------------------------------
 20 cells were created.
-Numbered 40727 knots in 10074 9-node elements.
-Numbering order was <y><x> and max levelwidth 280.
-69 element sides between materials 6 and 1 were located to type 1.
-69 element sides between materials 4 and 1 were located to type 2.
-115 element sides between materials 2 and 1 were located to type 3.
-146 element sides between materials 3 and 1 were located to type 4.
-143 element sides between materials 5 and 1 were located to type 5.
-3 element sides between materials 5 and 2 were located to type 6.
+Numbered 40535 knots in 10020 9-node elements.
+Numbering order was <y><x> and max levelwidth 244.
+60 element sides between materials 6 and 1 were located to type 1.
+60 element sides between materials 4 and 1 were located to type 2.
+120 element sides between materials 2 and 1 were located to type 3.
+165 element sides between materials 3 and 1 were located to type 4.
+165 element sides between materials 5 and 1 were located to type 5.
+2 element sides between materials 5 and 2 were located to type 6.
 Coordinates defined in 2 dimensions
 
 Elmergrid saving data with method 2:
 -------------------------------------
 Saving mesh in ElmerSolver format to directory fsi.
 Reusing an existing directory
-Saving 40727 coordinates to mesh.nodes.
-Saving 10074 element topologies to mesh.elements.
+Saving 40535 coordinates to mesh.nodes.
+Saving 10020 element topologies to mesh.elements.
 Saving boundary elements to mesh.boundary.
 Saving header info to mesh.header.
 
 Thank you for using Elmergrid!
 Send bug reports and feature wishes to elmeradm@csc.fi
 :end:
+
+
+
+* run it
+
+
+#+begin_src sh :async :results raw drawer
+cd /home/me/CAE/FluidStructureBeam
+
+#+end_src
+
