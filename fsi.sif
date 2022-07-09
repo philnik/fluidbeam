@@ -8,11 +8,11 @@ End
 Simulation
   Coordinate System = Cartesian 2D
   Simulation Type = Steady State
-  Steady State Max Iterations = 50
-  Steady State Min Iterations = 2
+  Steady State Max Iterations = 500
+  Steady State Min Iterations = 500
   Output Intervals = 1
   Output File = "fsi.result"
-  Post File = "fsi.vtu"
+  Post File = "fsi-4.vtu"
 End
 
 Body 1
@@ -36,7 +36,7 @@ End
 
 Material 2
    Density = 1000
-   Youngs Modulus = 1.0e3
+   Youngs Modulus = 1.0e6
    Poisson Ratio = 0.3
 End
 
@@ -46,7 +46,7 @@ Solver 1
   Linear System Solver = Iterative
   Linear System Iterative Method = BiCGStab
   Linear System Preconditioning = ILU1
-  Linear System Max Iterations = 5000
+  Linear System Max Iterations = 50000
   Linear System Convergence Tolerance = 1.0e-8
   Nonlinear System Max Iterations = 20
   Nonlinear System Convergence Tolerance = 1.0e-5
@@ -80,7 +80,7 @@ Solver 3
   Linear System Solver = Iterative
   Linear System Iterative Method = BiCGStab
   Linear System Preconditioning = ILU1
-  Linear System Max Iterations = 500
+  Linear System Max Iterations = 50000
   Linear System Convergence Tolerance = 1.0e-8
   Steady State Convergence Tolerance = 1.0e-4
 End
