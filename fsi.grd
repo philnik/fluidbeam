@@ -2,13 +2,13 @@
 Version = 210903
 Coordinate System = Cartesian 2D
 Subcell Divisions in 2D = 7 6 
-Subcell Limits 1 = -1 0 16 17 25 26 65 100 
-Subcell Limits 2 = -1 0 5 6 15 30 100 
+Subcell Limits 1 = -1 0 26 27 45 46 85 100 
+Subcell Limits 2 = -1 0 5 6 28 30 31
 Material Structure in 2D
   3    3    3    3    3    3    3    
   6    1    1    1    1    1    4
-  6    1    2    1    1    1    4	
-  6    1    2    2    2    1    4	
+  6    1    1    1    2    1    4	
+  6    1    1    1    2    1    4	
   6    1    1    1    2    1    4    
   5    5    5    5    5    5    5    
 End
@@ -26,9 +26,9 @@ Numbering = Vertical
 Element Degree = 2
 Element Innernodes = True
 Triangles = False
-Surface Elements = 10000
+Surface Elements = 20000
 Coordinate Ratios = 1       
-Minimum Element Divisions = 1 1
+Minimum Element Divisions = 5 5
 Element Ratios 1 = 1 1 1 1 1 1 1 1 1 1 1 
 Element Ratios 2 = 1 1 1 1 1 1 1 1 1 1 
 Element Densities 1 = 1 1 1 1 1 1 1 1 1 
