@@ -12,7 +12,7 @@ Simulation
   Steady State Min Iterations = 500
   Output Intervals = 1
   Output File = "fsi.result"
-  Post File = "fsi-4.vtu"
+  Post File = "fsi-7.vtu"
 End
 
 Body 1

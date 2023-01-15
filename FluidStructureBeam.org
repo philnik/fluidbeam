@@ -18,9 +18,6 @@ no elmerice
 /usr/bin/f95 FsiStuff.f90 -o FsiStuff.so -fopenmp -DCONTIG= -DHAVE_EXECUTECOMMANDLINE -DUSE_ISO_C_BINDINGS -DUSE_ARPACK -O2 -g -DNDEBUG -fPIC -shared -I/usr/local/share/elmersolver/include -L/usr/local/share/elmersolver/../../lib/elmersolver -shared -lelmersolver 
 :end:
 
-
-
-
 FUNCTION InFlow( Model, n, x ) RESULT( vin )
 Model: My model
 Node: the node
