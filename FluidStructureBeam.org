@@ -1,8 +1,54 @@
 
+
+
+
+
+
+* Fortran code sources
+#+begin_src fortran :tangle FsiStuff.f90
+FUNCTION Youngs( Model, n, x ) RESULT( s )
+  USE Types
+  TYPE(Model_t) :: Model
+  INTEGER :: n
+  REAL(KIND=dp) :: x,s,s1,s2,s3,xx,yy
+  
+  xx = Model % Nodes % x(n)
+  yy = Model % Nodes % y(n)
+  
+  s =  1.0d0 / SQRT( (xx-11.0)**2 + (yy-4.9)**2 )
+  
+END FUNCTION Youngs
+
+
+FUNCTION InFlow( Model, n, x ) RESULT( vin )
+  USE Types
+  TYPE(Model_t) :: Model
+  INTEGER :: n
+  REAL(KIND=dp) :: yy,x,vin,v0,vt
+  
+  xx = Model % Nodes % x(n)
+  yy = Model % Nodes % y(n)
+  
+  v0 = (-(yy**2)+10*yy)/10
+  
+  ! IF(x < 8.0) THEN
+  !   vt = x/8.0
+  ! ELSE
+  !   vt = 1.0
+  ! END IF
+
+
+  
+  !  vin = v0*vt
+
+  vin=sqrt(x)*0.0001*(30 - yy)*yy
+  
+END FUNCTION InFlow
+#+end_src
+
+
 Working on fortran code
 [[./FsiStuff.f90]]
-
-Increase the speed
 
 
 * compile fortran function
@@ -68,22 +114,22 @@ Read commands from a file
 Elmergrid creating and manipulating meshes:
 -------------------------------------------
 20 cells were created.
-Numbered 40535 knots in 10020 9-node elements.
-Numbering order was <y><x> and max levelwidth 244.
-60 element sides between materials 6 and 1 were located to type 1.
-60 element sides between materials 4 and 1 were located to type 2.
-120 element sides between materials 2 and 1 were located to type 3.
-165 element sides between materials 3 and 1 were located to type 4.
-165 element sides between materials 5 and 1 were located to type 5.
-2 element sides between materials 5 and 2 were located to type 6.
+Numbered 80883 knots in 20060 9-node elements.
+Numbering order was <y><x> and max levelwidth 344.
+85 element sides between materials 6 and 1 were located to type 1.
+85 element sides between materials 4 and 1 were located to type 2.
+163 element sides between materials 2 and 1 were located to type 3.
+236 element sides between materials 3 and 1 were located to type 4.
+231 element sides between materials 5 and 1 were located to type 5.
+5 element sides between materials 5 and 2 were located to type 6.
 Coordinates defined in 2 dimensions
 
 Elmergrid saving data with method 2:
 -------------------------------------
 Saving mesh in ElmerSolver format to directory fsi.
 Reusing an existing directory
-Saving 40535 coordinates to mesh.nodes.
-Saving 10020 element topologies to mesh.elements.
+Saving 80883 coordinates to mesh.nodes.
+Saving 20060 element topologies to mesh.elements.
 Saving boundary elements to mesh.boundary.
 Saving header info to mesh.header.
 
@@ -93,11 +139,16 @@ Send bug reports and feature wishes to elmeradm@csc.fi
 
 
 
+* sif file
+
+[[./fsi.sif]]
+
+
 * run it
 
 
 #+begin_src sh :async :results raw drawer
 cd /home/me/CAE/FluidStructureBeam
-
+ElmerSolver
 #+end_src
 
