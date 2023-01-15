@@ -152,3 +152,277 @@ cd /home/me/CAE/FluidStructureBeam
 ElmerSolver
 #+end_src
 
+
+
+
+* gnuplot data
+
+
+
+#+begin_src gnuplot
+set multiplot
+set style line 1 linecolor rgb '#0060ad' linetype 1 linewidth 2
+set style line 2 linecolor rgb '#dd181f' linetype 1 linewidth 2
+plot "m0.dat" using 1 with lines linestyle 1
+plot "m10.dat" using 1 with lines linestyle 2 
+plot "m20.dat" using 1 with lines
+plot "m30.dat" using 1 with lines
+#+end_src
+
+#+RESULTS:
+
+
+   1: value: coordinate 1 at node 18640
+   2: value: coordinate 2 at node 18640
+   3: value: coordinate 3 at node 18640
+   4: value: velocity 1 at node 18640
+   5: value: velocity 2 at node 18640
+   6: value: pressure at node 18640
+   7: value: mesh update 1 at node 18640
+   8: value: mesh update 2 at node 18640
+ 
+
+
+#+begin_src python :session *Python* :results value
+
+m0 = "m0.dat"
+m10 = "m10.dat"
+
+
+f0 = open(m0)
+f10 = open(m10)
+
+n1 = []
+n2 = []
+for line in f0:
+    number = line.split("  ")
+    n1 = []
+    for i in number:
+        try:
+            g = float(i)
+            g = round(g,3)
+            n1.append(g)
+        except:
+            #print("NaN")
+            pass
+    n2.append(n1)
+n2
+
+#+end_src
+
+#+RESULTS:
+| 10.072 |  0.0 | 0.0 | 0.0 | 0.0 | 0.081 | 0.002 |  0.0 |
+| 10.073 | -0.0 | 0.0 | 0.0 | 0.0 | 0.115 | 0.003 | -0.0 |
+| 10.074 | -0.0 | 0.0 | 0.0 | 0.0 | 0.141 | 0.004 | -0.0 |
+| 10.075 |  0.0 | 0.0 | 0.0 | 0.0 | 0.164 | 0.004 |  0.0 |
+| 10.075 | -0.0 | 0.0 | 0.0 | 0.0 | 0.184 | 0.005 | -0.0 |
+| 10.076 |  0.0 | 0.0 | 0.0 | 0.0 | 0.203 | 0.005 |  0.0 |
+| 10.076 | -0.0 | 0.0 | 0.0 | 0.0 |  0.22 | 0.006 | -0.0 |
+| 10.076 |  0.0 | 0.0 | 0.0 | 0.0 | 0.237 | 0.006 |  0.0 |
+| 10.077 |  0.0 | 0.0 | 0.0 | 0.0 | 0.253 | 0.006 |  0.0 |
+| 10.077 |  0.0 | 0.0 | 0.0 | 0.0 | 0.268 | 0.007 |  0.0 |
+| 10.077 | -0.0 | 0.0 | 0.0 | 0.0 | 0.282 | 0.007 | -0.0 |
+| 10.078 | -0.0 | 0.0 | 0.0 | 0.0 | 0.296 | 0.007 | -0.0 |
+| 10.078 |  0.0 | 0.0 | 0.0 | 0.0 |  0.31 | 0.008 |  0.0 |
+| 10.079 |  0.0 | 0.0 | 0.0 | 0.0 | 0.323 | 0.008 |  0.0 |
+| 10.079 |  0.0 | 0.0 | 0.0 | 0.0 | 0.336 | 0.008 |  0.0 |
+| 10.079 |  0.0 | 0.0 | 0.0 | 0.0 | 0.349 | 0.009 |  0.0 |
+|  10.08 |  0.0 | 0.0 | 0.0 | 0.0 | 0.361 | 0.009 |  0.0 |
+|  10.08 |  0.0 | 0.0 | 0.0 | 0.0 | 0.373 | 0.009 |  0.0 |
+|  10.08 |  0.0 | 0.0 | 0.0 | 0.0 | 0.386 |  0.01 |  0.0 |
+|  10.08 |  0.0 | 0.0 | 0.0 | 0.0 | 0.397 |  0.01 |  0.0 |
+| 10.081 |  0.0 | 0.0 | 0.0 | 0.0 | 0.409 |  0.01 |  0.0 |
+| 10.081 |  0.0 | 0.0 | 0.0 | 0.0 | 0.421 | 0.011 |  0.0 |
+| 10.081 |  0.0 | 0.0 | 0.0 | 0.0 | 0.432 | 0.011 |  0.0 |
+| 10.081 |  0.0 | 0.0 | 0.0 | 0.0 | 0.443 | 0.011 |  0.0 |
+| 10.082 |  0.0 | 0.0 | 0.0 | 0.0 | 0.455 | 0.011 |  0.0 |
+| 10.082 |  0.0 | 0.0 | 0.0 | 0.0 | 0.466 | 0.012 |  0.0 |
+| 10.082 |  0.0 | 0.0 | 0.0 | 0.0 | 0.477 | 0.012 |  0.0 |
+| 10.083 |  0.0 | 0.0 | 0.0 | 0.0 | 0.488 | 0.012 |  0.0 |
+| 10.083 |  0.0 | 0.0 | 0.0 | 0.0 | 0.498 | 0.012 |  0.0 |
+| 10.083 |  0.0 | 0.0 | 0.0 | 0.0 | 0.509 | 0.013 |  0.0 |
+| 10.083 |  0.0 | 0.0 | 0.0 | 0.0 |  0.52 | 0.013 |  0.0 |
+| 10.084 |  0.0 | 0.0 | 0.0 | 0.0 |  0.53 | 0.013 |  0.0 |
+| 10.084 |  0.0 | 0.0 | 0.0 | 0.0 | 0.541 | 0.013 |  0.0 |
+| 10.084 |  0.0 | 0.0 | 0.0 | 0.0 | 0.551 | 0.014 |  0.0 |
+| 10.084 |  0.0 | 0.0 | 0.0 | 0.0 | 0.562 | 0.014 |  0.0 |
+| 10.085 |  0.0 | 0.0 | 0.0 | 0.0 | 0.572 | 0.014 |  0.0 |
+| 10.085 |  0.0 | 0.0 | 0.0 | 0.0 | 0.582 | 0.014 |  0.0 |
+| 10.085 |  0.0 | 0.0 | 0.0 | 0.0 | 0.592 | 0.015 |  0.0 |
+| 10.085 |  0.0 | 0.0 | 0.0 | 0.0 | 0.603 | 0.015 |  0.0 |
+| 10.086 |  0.0 | 0.0 | 0.0 | 0.0 | 0.613 | 0.015 |  0.0 |
+
+
+
+* Using awk to extract columns
+
+** first column
+#+begin_src awk :tangle script.awk
+FILENAME == ARGV[1] { one[FNR]=$1 }
+FILENAME == ARGV[2] { two[FNR]=$1 }
+FILENAME == ARGV[3] { three[FNR]=$1 }
+FILENAME == ARGV[4] { four[FNR]=$1 }
+
+END {
+    for (i=1; i<=length(one); i++) {
+        print i, one[i], two[i], three[i], four[i]
+    }
+}
+#+end_src
+
+#+begin_src shell :results output file :file f1.dat
+awk -f script.awk m0.dat m10.dat m20.dat m30.dat
+#+end_src
+
+#+RESULTS:
+[[file:f1.dat]]
+
+
+
+
+
+
+** column 4
+#+begin_src awk :tangle script4.awk
+FILENAME == ARGV[1] { one[FNR]=$4 }
+FILENAME == ARGV[2] { two[FNR]=$4 }
+FILENAME == ARGV[3] { three[FNR]=$4 }
+FILENAME == ARGV[4] { four[FNR]=$4}
+
+END {
+    for (i=1; i<=length(one); i++) {
+        print i, one[i], two[i], three[i], four[i]
+    }
+}
+#+end_src
+
+#+begin_src shell :results output file :file f4.dat
+awk -f script4.awk m0.dat m10.dat m20.dat m30.dat
+#+end_src
+
+#+RESULTS:
+[[file:f4.dat]]
+
+
+** Plot results with gnuplot
+
+#+begin_src gnuplot
+data = "f4.dat"
+unset multiplot
+set style line 1 linecolor rgb '#0060ad' linetype 1 linewidth 1
+set style line 2 linecolor rgb '#dd181f' linetype 1 linewidth 1
+set style line 3 linecolor rgb '#00181f' linetype 1 linewidth 1
+plot data using 1:2 with lines linestyle 1, data using 1:3 with lines linestyle 2, data using 1:4 with lines linestyle 3, data using 1:4 with lines linestyle 3, data using 1:5 with lines linestyle 3
+#+end_src
+
+#+RESULTS:
+
+
+** pressure vs speed
+
+
+#+begin_src gnuplot
+data = "m10.dat"
+set xrange [0.01:0.2]
+set yrange [0:0.5]
+set style line 1 linecolor rgb '#0060ad' linetype 1 linewidth 1
+set style line 2 linecolor rgb '#dd181f' linetype 1 linewidth 1
+set style line 3 linecolor rgb '#00181f' linetype 1 linewidth 1
+plot data using 4:6 with lines linestyle 1
+#+end_src
+
+#+RESULTS:
+
+
+** Plot results with gnuplot
+
+#+begin_src gnuplot
+unset multiplot
+set style line 1 linecolor rgb '#0060ad' linetype 1 linewidth 1
+set style line 2 linecolor rgb '#dd181f' linetype 1 linewidth 1
+set style line 3 linecolor rgb '#00181f' linetype 1 linewidth 1
+plot "f1.dat" using 1:2 with lines linestyle 1, "f1.dat" using 1:3 with lines linestyle 2,  "f1.dat" using 1:4 with lines linestyle 3, "f1.dat" using 1:4 with lines linestyle 3,  "f1.dat" using 1:5 with lines linestyle 3
+#+end_src
+
+
+
+#+RESULTS:
+
+
+
+
+* get all columns with value lower thank
+
+#+begin_src shell
+
+while IFS= read -r i; do
+    awk -F',' 'NR==1 || $6<0.01' "$i" > "${i}_ctdna_freq.txt"
+done < p5.csv
+
+#+end_src
+
+#+RESULTS:
+
+
+#+begin_src python :session *Python* :results value
+import numpy as np
+import csv
+
+def is_x_0(x):
+    return x < 0.01
+
+def write_to_csv(filename,array):
+    with open(filename, 'w') as file:
+        writer = csv.writer(file, delimiter = ' ')
+        [writer.writerow(data) for data in array]
+
+
+def get_vals_at_x(filename,predicate):
+    num = []
+    x_raw_col=4
+    with open(filename,'r') as f0:
+        f0.readline()
+        for i in f0:
+            q=i.split(',')
+            v = [round(float(i),3) for i in q]
+            x = v[x_raw_col]
+            if (predicate(x)):
+                row = [v[0],v[1],v[4],v[5]]
+                num.append(row)
+    n0 = sorted(num,key=lambda a_entry: a_entry[3])
+    return n0
+
+
+
+num0 = get_vals_at_x('p6.csv',lambda x: x < 0.1)
+num10 = get_vals_at_x('p6.csv',lambda x: x > 09.99 and x<10.1 )
+num20 = get_vals_at_x('p6.csv',lambda x: x > 19.99 and x<20.1 )
+num40 = get_vals_at_x('p6.csv',lambda x: x > 39.99 and x<40.1 )
+num50 = get_vals_at_x('p6.csv',lambda x: x > 49.99 and x<50.1 )
+num60 = get_vals_at_x('p6.csv',lambda x: x > 59.99 and x<60.1 )
+num70 = get_vals_at_x('p6.csv',lambda x: x > 69.99 and x<70.1 )
+num85 = get_vals_at_x('p6.csv',lambda x: x > 84.99)
+
+
+write_to_csv('a0.csv',num0  )
+write_to_csv('a10.csv',num10)
+write_to_csv('a20.csv',num20)
+write_to_csv('a40.csv',num40)
+write_to_csv('a50.csv',num50)
+write_to_csv('a60.csv',num60)
+write_to_csv('a70.csv',num70)
+write_to_csv('a85.csv',num85)
+#+end_src
+
+#+RESULTS:
+: None
+
+#+begin_src gnuplot 
+set xrange [0:30]
+set yrange [0:0.4]
+plot 'a0.csv' u 4:2 w lines, 'a10.csv' u 4:2 w lines, 'a20.csv' u 4:2 w lines, 'a40.csv' u 4:2 w lines, 'a50.csv' u 4:2 w lines, 'a60.csv' u 4:2 w lines, 'a70.csv' u 4:2 w lines, 'a85.csv' u 4:2 w lines
+
+#+end_src
+
+#+RESULTS:
+
