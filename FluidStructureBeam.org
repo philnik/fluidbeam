@@ -438,3 +438,76 @@ plot 'a0.csv' u 4:2 w lines, 'a10.csv' u 4:2 w lines, 'a20.csv' u 4:2 w lines, '
 
 #+RESULTS:
 
+
+
+#+begin_src python :session *Python*
+import vtk
+import numpy as np
+import vtk as v
+from vtk.numpy_interface import dataset_adapter as dsa
+
+file_name = "/hb/CAE/fluidbeam/fsi/fsi-1_t0001.vtu"
+
+# Read the source file.
+reader = vtk.vtkXMLUnstructuredGridReader()
+reader.SetFileName(file_name)
+reader.Update()  # Needed because of GetScalarRange
+#reader.ReadAllScalarsOn()
+#reader.ReadAllVectorsOn()
+reader.Update()
+usg = dsa.WrapDataObject( reader.GetOutput() )
+array1 = usg.PointData['pressure']
+np.savetxt('array1.dat', array1, fmt='%4.5f' )
+#+end_src
+
+#+RESULTS:
+: None
+
+nodes_vtk_array= reader.GetOutput().GetPoints().GetData()
+nodes_numpy_array = vtk.util.numpy_support.vtk_to_numpy(nodes_vtk_array)
+x,y,z= nodes_numpy_array[:,0] , nodes_numpy_array[:,1] , nodes_numpy_array[:,2]
+
+number_of_fields = reader.GetOutput().GetPointData().GetNumberOfArrays()
+
+field_names = []
+for i in range(number_of_fields):
+field_names.append(reader.GetOutput().GetPointData().GetArrayName(i))
+
+
+
+#+begin_src python
+#Load modules
+import numpy np; import vtk as vtk; from vtk.util import numpy_support
+
+#Load vtu data (pvtu directs to vtu files)
+reader = vtk.vtkXMLPUnstructuredGridReader()
+reader.SetFileName('full_path_and_name_of_pvtu_file')
+reader.Update()
+
+#Example for how to set the file name:
+reader.SetFileName('/home/naliboff/solution-00000.pvtu')
+
+#Get the coordinates of nodes in the mesh
+nodes_vtk_array= reader.GetOutput().GetPoints().GetData()
+
+#Convert nodal vtk data to a numpy array
+nodes_numpy_array = vtk.util.numpy_support.vtk_to_numpy(nodes_vtk_array)
+
+#Extract x, y and z coordinates from numpy array
+x,y,z= nodes_numpy_array[:,0] , nodes_numpy_array[:,1] , nodes_numpy_array[:,2]
+
+#Determine the number of scalar fields contained in the .pvtu file
+number_of_fields = reader.GetOutput().GetPointData().GetNumberOfArrays()
+
+#Determine the name of each field and place it in an array.
+field_names = []
+for i in range(number_of_fields):
+    field_names.append(reader.GetOutput().GetPointData().GetArrayName(i))
+
+#Determine the index of the field strain_rate
+idx = field_names.index("strain_rate")
+
+#Example: Extract values of strain_rate
+field_vtk_array = reader.GetOutput().GetPointData().GetArray(idx)
+strain_rate = numpy_support.vtk_to_numpy(field_vtk_array)
+#+end_src
