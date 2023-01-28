@@ -86,41 +86,46 @@ Solver 3
 End
 
 Solver 4
-  Equation = "SaveScalars"
+  Equation = "s0"
   Exec Solver = "after timestep"
   Procedure = File "SaveData" "SaveScalars"
-  Filename = "model_output.dat"
+  Filename = "m0.dat"
   File Append = Logical False
-  Save Coordinates(1,2) = Real 19.0 0.0	
+  Save Coordinates(1,2) = Real 0.0 0.0	
 End
 
 
 Solver 5
-Exec Solver = After Simulation
-Equation = SaveLine
-Procedure = File "SaveData" "SaveLine"
-Filename = "line1.dat"
-!Polyline Coordinates(2,3) = 0.0 0.0 0.0 0.0 30.0 0.0
-Save Axis = Logical True
-Polyline Divisions(2) = 100 100
-File Append = Logical False	
+  Equation = "s10"
+  Exec Solver = "after timestep"
+  Procedure = File "SaveData" "SaveScalars"
+  Filename = "m10.dat"
+  File Append = Logical False
+  Save Coordinates(1,2) = Real 0.0 10.0	
 End
-
 
 Solver 6
-Exec Solver = After Simulation
-Equation = SaveLine2
-Procedure = File "SaveData" "SaveLine"
-Filename = "line2.dat"
-Polyline Coordinates(2,3) = 80.0 0.0 0.0 80.0 30.0 0.0
-Polyline Divisions(2) = 100 100
-File Append = Logical False
+  Equation = "s20"
+  Exec Solver = "after timestep"
+  Procedure = File "SaveData" "SaveScalars"
+  Filename = "m20.dat"
+  File Append = Logical False
+  Save Coordinates(1,2) = Real 0.0 20.0	
 End
 
+
+Solver 7
+  Equation = "s30"
+  Exec Solver = "after timestep"
+  Procedure = File "SaveData" "SaveScalars"
+  Filename = "m30.dat"
+  File Append = Logical False
+  Save Coordinates(1,2) = Real 0.0 30.0	
+End
 
 
 Equation 1
-  Active Solvers(5) = 1 3 4 5 6
+  Active Solvers(6) = 1 3 4 5 6 7
 End
 
 Equation 2

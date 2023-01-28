@@ -1,3 +1,4 @@
+program main
 FUNCTION Youngs( Model, n, x ) RESULT( s )
   USE Types
   TYPE(Model_t) :: Model
@@ -33,7 +34,7 @@ FUNCTION InFlow( Model, n, x ) RESULT( vin )
   
   !  vin = v0*vt
 
-  vin=sqrt(x)*0.0002*(30 - yy)*yy
+  vin=sqrt(x)*0.0001*(30 - yy)*yy
   
 END FUNCTION InFlow
-
+end program main
